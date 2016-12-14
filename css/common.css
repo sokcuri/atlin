@@ -57,6 +57,10 @@ body {
     -webkit-app-region: drag;
 }
 
+ .chrome-navigate-bar {
+    -webkit-user-drag: none;
+ }
+
 .chrome-tab-background, .chrome-navigate-bar, .wc-box {
     -webkit-app-region: no-drag;
 }
@@ -76,14 +80,6 @@ body {
     float: left;
     border-radius: 2px;
     overflow: visible;
-}
-
-.chrome-navigate-button:hover {
-    background: #e5e5e5;
-}
-
-.chrome-navigate-button:active {
-    background: #d7d7d7;
 }
 
 .chrome-navigate-address {
@@ -121,7 +117,6 @@ body {
 
 .chrome-navigate-back {
     -webkit-mask-image: url(../svg/back.svg);
-    background: #6d6d6d;
     -webkit-mask-size: 24px, auto, cover;
     width: inherit;
     height: inherit;
@@ -129,7 +124,6 @@ body {
 
 .chrome-navigate-forward {
     -webkit-mask-image: url(../svg/forward.svg);
-    background: #6d6d6d;
     -webkit-mask-size: 24px, auto, cover;
     width: inherit;
     height: inherit;
@@ -137,7 +131,6 @@ body {
 
 .chrome-navigate-stop {
     -webkit-mask-image: url(../svg/stop.svg);
-    background: #6d6d6d;
     -webkit-mask-size: 24px, auto, cover;
     width: inherit;
     height: inherit;
@@ -145,7 +138,6 @@ body {
 
 .chrome-navigate-refresh {
     -webkit-mask-image: url(../svg/refresh.svg);
-    background: #6d6d6d;
     -webkit-mask-size: 24px, auto, cover;
     width: inherit;
     height: inherit;
@@ -153,7 +145,6 @@ body {
 
 .chrome-navigate-home {
     -webkit-mask-image: url(../svg/home.svg);
-    background: #6d6d6d;
     -webkit-mask-size: 24px, auto, cover;
     width: inherit;
     height: inherit;

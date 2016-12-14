@@ -56,3 +56,14 @@
 .deactivated .chrome-tabs.chrome-tabs-dark-theme .chrome-tabs-settings {
   background: #dcdcdc;
 }
+
+.chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-button:hover {
+  background: #666666;
+}
+
+.chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-button:active {
+  background: #797979;
+}
+.chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-back, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-forward, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-stop, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-refresh, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-home {
+  background: #dcdcdc;
+}

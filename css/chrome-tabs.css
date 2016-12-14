@@ -197,3 +197,14 @@
 .deactivated .chrome-tabs-settings {
   background: #d5d5d5;
 }
+
+.chrome-navigate-button:hover {
+  background: #e5e5e5;
+}
+
+.chrome-navigate-button:active {
+  background: #d7d7d7;
+}
+.chrome-navigate-back, .chrome-navigate-forward, .chrome-navigate-stop, .chrome-navigate-refresh, .chrome-navigate-home {
+  background: #6d6d6d;
+}
