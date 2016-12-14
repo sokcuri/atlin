@@ -1,5 +1,5 @@
 {
-  "name": "atlatool",
+  "name": "atlin",
   "version": "1.0.0",
   "scripts": {
     "start": "electron ./index.js"
