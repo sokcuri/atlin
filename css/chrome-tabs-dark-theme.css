@@ -1,19 +1,45 @@
-.chrome-tabs.chrome-tabs-dark-theme {
-  background: linear-gradient(#252526, #252020);
+.activated .chrome-tabs.chrome-tabs-dark-theme {
+  background: linear-gradient(#1E2022, #1E1E1E);
   box-shadow: 0 0.05em #282828;
 }
-.chrome-tabs.chrome-tabs-dark-theme .chrome-tabs-bottom-bar {
-  background: #606060;
+.deactivated .chrome-tabs.chrome-tabs-dark-theme {
+  background: #1E1E1E;
+  box-shadow: 0 0.05em #282828;
+}
+.activated .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-bar {
+  background: #505050;
   box-shadow: 0 -0.05em rgba(0,0,0,0.5);
 }
+.deactivated .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-bar {
+  background: #2D2D2D;
+  box-shadow: 0 -0.05em rgba(0,0,0,0.5);
+}
+
+.chrome-tabs.chrome-tabs-dark-theme input[type="text"] {
+  background: #616161;
+  -webkit-box-shadow: #3D3D3D 0px 0 1px;
+  color: white;
+}
+
+.chrome-tabs.chrome-tabs-dark-theme input[type="text"]:focus {
+  box-sizing: border-box;
+  -webkit-box-shadow: #7DACF4 0 0 0 1px;
+}
+
 .chrome-tabs.chrome-tabs-dark-theme .chrome-tab .chrome-tab-background > svg .chrome-tab-shadow {
   stroke: rgba(0,0,0,0.5);
 }
-.chrome-tabs.chrome-tabs-dark-theme .chrome-tab .chrome-tab-background > svg .chrome-tab-background {
+.activated .chrome-tabs.chrome-tabs-dark-theme .chrome-tab .chrome-tab-background > svg .chrome-tab-background {
   fill: #373737;
 }
-.chrome-tabs.chrome-tabs-dark-theme .chrome-tab.chrome-tab-current .chrome-tab-background > svg .chrome-tab-background {
-  fill: #606060;
+.deactivated .chrome-tabs.chrome-tabs-dark-theme .chrome-tab .chrome-tab-background > svg .chrome-tab-background {
+  fill: #282828;
+}
+.activated .chrome-tabs.chrome-tabs-dark-theme .chrome-tab.chrome-tab-current .chrome-tab-background > svg .chrome-tab-background {
+  fill: #505050;
+}
+.deactivated .chrome-tabs.chrome-tabs-dark-theme .chrome-tab.chrome-tab-current .chrome-tab-background > svg .chrome-tab-background {
+  fill: #2D2D2D;
 }
 .chrome-tabs.chrome-tabs-dark-theme .chrome-tab .chrome-tab-title {
   -webkit-font-smoothing: antialiased;
@@ -21,4 +47,12 @@
 }
 .chrome-tabs.chrome-tabs-dark-theme .chrome-tab .chrome-tab-close:not(:hover) {
   color: #cfcfcf;
+}
+
+.activated .chrome-tabs.chrome-tabs-dark-theme .chrome-tabs-settings {
+  background: white;
+}
+
+.deactivated .chrome-tabs.chrome-tabs-dark-theme .chrome-tabs-settings {
+  background: #dcdcdc;
 }

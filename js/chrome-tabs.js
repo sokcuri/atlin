@@ -115,7 +115,7 @@
     }
 
     fixZIndexes() {
-      const bottomBarEl = this.el.querySelector('.chrome-tabs-bottom-bar')
+      const bottomBarEl = this.el.querySelector('.chrome-navigate-bar')
       const tabEls = this.tabEls
 
       tabEls.forEach((tabEl, i) => {

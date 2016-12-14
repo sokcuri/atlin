@@ -11,8 +11,12 @@ body {
 }
 
 .darwin .chrome-tabs {
-    height: 4.0em !important;
-    padding-top: 0.8em !important;
+    height: 7.4em !important;
+    padding-top: 0.9em !important;
+}
+
+.darwin .chrome-navigate-bar {
+    height: 3.75em !important;
 }
 
 .chrome-tabs-drag-region {
@@ -42,9 +46,9 @@ body {
 }
 
 .darwin .chrome-tabs .chrome-tabs-content {
-    width: calc(100% - 64px) !important;
+    width: calc(100% - 80px) !important;
 }
-.chrome-tabs-content, .chrome-tabs-bottom-bar {
+.chrome-tabs-content, .chrome-navigate-bar {
     /*-webkit-app-region: no-drag;*/
 }
 
@@ -52,7 +56,7 @@ body {
     -webkit-app-region: drag;
 }
 
-.chrome-tab-background, .wc-box {
+.chrome-tab-background, .chrome-navigate-bar, .wc-box {
     -webkit-app-region: no-drag;
 }
 
@@ -62,6 +66,35 @@ body {
 
 .chrome-tab-close {
     display: none;
+}
+
+.chrome-navigate-address input[type="text"] {
+    -webkit-appearance: none;
+    border-width: 0px;
+    padding: 0px 0px 2px 8px;
+    width: calc(100% - 100px);
+    height: 1.85em;
+    font-size: 1.4em;
+    margin: 0.4em 0.6em 0.4em 6.6em;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.chrome-tabs-right {
+  display: inline-block;
+  right: 8px;
+  top: 8px;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+}
+
+.chrome-tabs-settings {
+    -webkit-mask-image: url(./../svg/settings.svg);
+    -webkit-mask-size: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .wc-box {
