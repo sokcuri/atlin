@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.chrome-tabs {
+    height: 5.2em !important;
+    border-radius: 0 !important;
+    /*-webkit-app-region: drag;*/
+    padding-left: 0.8em !important;
+}
+
+.darwin .chrome-tabs {
+    height: 4.0em !important;
+    padding-top: 0.8em !important;
+}
+
+.chrome-tabs-drag-region {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 3px;
+    -webkit-app-region: drag;
+    z-index: 0;
+}
+
+
+.chrome-tabs-content {
+    margin-top: 10px !important;
+    -webkit-user-select: none; 
+}
+
+.darwin .chrome-tabs-content {
+    margin-top: 0px !important;
+    margin-left: 64px !important;
+}
+
+.chrome-tabs .chrome-tabs-content {
+    width: calc(100% - 120px) !important;
+}
+
+.darwin .chrome-tabs .chrome-tabs-content {
+    width: calc(100% - 64px) !important;
+}
+.chrome-tabs-content, .chrome-tabs-bottom-bar {
+    /*-webkit-app-region: no-drag;*/
+}
+
+.chrome-tabs-content {
+    -webkit-app-region: drag;
+}
+
+.chrome-tab-background, .wc-box {
+    -webkit-app-region: no-drag;
+}
+
+.chrome-tab-id, .chrome-tab-site {
+    display: none;
+}
+
+.chrome-tab-close {
+    display: none;
+}
+
+.wc-box {
+    position: absolute;
+    /*top: calc(50% - 15px);*/
+    /*right: calc(50% - 45px);*/
+    right: 0;
+    top: 0;
+}
+
+.darwin .wc-box {
+    display: none;
+}
+
+.wc-box div {
+    position: relative;
+    float: left;
+    width: 40px;
+    height: 30px;
+}
+
+.wc-box div:before,
+.wc-box div:after {
+    top: 30%;
+    right: 30%;
+    bottom: 30%;
+    left: 30%;
+    content: " ";
+    position: absolute;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+}
+
+.wc-box #minimize_btn:before {
+    border-bottom-width: 2px;
+}
+
+.wc-box #maximize_btn:before {
+    border-width: 1px 1px 2px 1px;
+}
+
+.wc-box #close_btn:before,
+.wc-box #close_btn:after {
+    bottom: 50%;
+    top: 50%;
+}
+
+.wc-box #close_btn:before {
+    transform: rotate(45deg);
+}
+
+.wc-box #close_btn:after {
+    transform: rotate(-45deg);
+}
+
+.wc-box div:hover {
+    background-color: #CCCCCC;
+}
+
+.wc-box #close_btn:hover {
+    background-color: #E04343;
+}
+
+.wc-box div:hover:after,
+.wc-box div:hover:before {
+    border-color: #333333;
+}
+
+.wc-box #close_btn:hover:after,
+.wc-box #close_btn:hover:before {
+    border-color: #FFFFFF;
+}
+
+.bottom-menu {
+    bottom: 0px;
+    position: absolute;
+    background: #137CC8;
+    width: 100%;
+    padding: 5px;
+    overflow: hidden;
+}
+
+#wv-collect > webview {
+    height: calc(100% - 70px);
+    position: absolute;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
