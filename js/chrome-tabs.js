@@ -135,7 +135,7 @@
       return div.firstElementChild
     }
 
-    addTab(tabProperties) {
+    addTab(tabProperties, isSetCurrent) {
       const tabEl = this.createNewTabEl()
 
       tabEl.classList.add('chrome-tab-just-added')
@@ -145,7 +145,8 @@
       this.tabContentEl.appendChild(tabEl)
       this.updateTab(tabEl, tabProperties)
       this.emit('tabAdd', { tabEl })
-      this.setCurrentTab(tabEl)
+      if (isSetCurrent)
+        this.setCurrentTab(tabEl);
       this.layoutTabs()
       this.fixZIndexes()
       this.setupDraggabilly()

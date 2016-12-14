@@ -4,6 +4,7 @@ body {
 }
 
 .chrome-tabs {
+    z-index: 1;
     height: 5.2em !important;
     border-radius: 0 !important;
     /*-webkit-app-region: drag;*/
@@ -68,26 +69,47 @@ body {
     display: none;
 }
 
+.chrome-navigate-button {
+    margin: 6px 0 6px 6px;
+    width: 24px;
+    height: 24px;
+    float: left;
+    border-radius: 2px;
+    overflow: visible;
+}
+
+.chrome-navigate-button:hover {
+    background: #e5e5e5;
+}
+
+.chrome-navigate-button:active {
+    background: #d7d7d7;
+}
+
+.chrome-navigate-address {
+    overflow: hidden;
+}
+
 .chrome-navigate-address input[type="text"] {
     -webkit-appearance: none;
     border-width: 0px;
     padding: 0px 0px 2px 8px;
-    width: calc(100% - 100px);
+    width: calc(100% - 15px);
     height: 1.85em;
     font-size: 1.4em;
-    margin: 0.4em 0.6em 0.4em 6.6em;
+    margin: 0.4em 0.6em 0.4em 0.6em;
     border-radius: 3px;
     box-sizing: border-box;
     outline: none;
 }
 
 .chrome-tabs-right {
-  display: inline-block;
-  right: 8px;
-  top: 8px;
-  position: absolute;
-  height: 20px;
-  width: 20px;
+    display: inline-block;
+    right: 8px;
+    top: 8px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
 }
 
 .chrome-tabs-settings {
@@ -95,6 +117,46 @@ body {
     -webkit-mask-size: cover;
     height: 100%;
     width: 100%;
+}
+
+.chrome-navigate-back {
+    -webkit-mask-image: url(../svg/back.svg);
+    background: #6d6d6d;
+    -webkit-mask-size: 24px, auto, cover;
+    width: inherit;
+    height: inherit;
+}
+
+.chrome-navigate-forward {
+    -webkit-mask-image: url(../svg/forward.svg);
+    background: #6d6d6d;
+    -webkit-mask-size: 24px, auto, cover;
+    width: inherit;
+    height: inherit;
+}
+
+.chrome-navigate-stop {
+    -webkit-mask-image: url(../svg/stop.svg);
+    background: #6d6d6d;
+    -webkit-mask-size: 24px, auto, cover;
+    width: inherit;
+    height: inherit;
+}
+
+.chrome-navigate-refresh {
+    -webkit-mask-image: url(../svg/refresh.svg);
+    background: #6d6d6d;
+    -webkit-mask-size: 24px, auto, cover;
+    width: inherit;
+    height: inherit;
+}
+
+.chrome-navigate-home {
+    -webkit-mask-image: url(../svg/home.svg);
+    background: #6d6d6d;
+    -webkit-mask-size: 24px, auto, cover;
+    width: inherit;
+    height: inherit;
 }
 
 .wc-box {
@@ -179,7 +241,9 @@ body {
 }
 
 #wv-collect > webview {
-    height: calc(100% - 70px);
+    height: calc(100% - 74px - 30px);
+    top: 74px;
+    z-index: 0;
     position: absolute;
     width: 100%;
 }
