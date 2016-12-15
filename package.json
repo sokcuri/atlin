@@ -2,7 +2,9 @@
   "name": "atlin",
   "version": "1.0.0",
   "scripts": {
-    "start": "electron ./src/main.js"
+    "start": "electron ./src/main.js",
+    "build": "node tools/build.js",
+    "clean": "node tools/clean.js"
   },
   "devDependencies": {
     "electron": "^1.4.12",

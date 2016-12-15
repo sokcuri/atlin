@@ -108,6 +108,26 @@
             wv.loadURL(wv.dataset.initurl);
         });
 
+        /* webview reload */
+        var webViewReload = () => {
+          if (tabHash.get(document.querySelector('.chrome-tab-current')))
+            tabHash.get(document.querySelector('.chrome-tab-current')).reload();
+        }
+        var webViewBack = () => {
+          if (tabHash.get(document.querySelector('.chrome-tab-current')))
+            tabHash.get(document.querySelector('.chrome-tab-current')).goBack();
+        }
+        var webViewForward = () => {
+          if (tabHash.get(document.querySelector('.chrome-tab-current')))
+            tabHash.get(document.querySelector('.chrome-tab-current')).goForward();
+        }
+        var webViewHome = () => {
+          if (tabHash.get(document.querySelector('.chrome-tab-current'))) {
+            let wv = tabHash.get(document.querySelector('.chrome-tab-current'));
+            wv.loadURL(wv.dataset.initurl);
+          }
+        }
+
         var focusOnce = false;
         address_text.addEventListener('focus', (e) => {
             focusOnce = true;
@@ -179,8 +199,11 @@
               return true;
           });
           wv.addEventListener('will-navigate', (e) => {
-            console.info(wv.hidden);
-            console.warn(wv.src);
+            if (wv.hidden == false) {
+              document.getElementById('address_text').value = e.url;
+            }
+          });
+          wv.addEventListener('did-navigate', (e) => {
             if (wv.hidden == false) {
               document.getElementById('address_text').value = e.url;
             }
@@ -287,14 +310,16 @@
       let tabInfo = [];
       
       const request = require('request');
-      request('https://github.com/sokcuri/atlin/raw/master/data/tabinfo.json',
+      request('https://github.com/sokcuri/atlin/raw/master/src/data/tabinfo.json',
         function(error, res, body) {
           try {
             if(!error && res.statusCode == 200) {
-                JSON.parse(body);
+                tabInfo = JSON.parse(body);
+                console.info('res.statuscode: ' + res.statusCode);
             } else throw('error');
           } catch (e) {
               console.error('tabinfo error');
+              console.info('body: ' + body);
               tabInfo = [
               {
                   title: 'Jira',
@@ -319,7 +344,6 @@
           
           // initialize
           setTimeout(() => {
-
             let first = true;
             for (let t of tabInfo) {
               chromeTabs.addTab(t, first);
