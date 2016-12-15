@@ -11,10 +11,12 @@
 }
 .activated .chrome-tabs {
   background: linear-gradient(#c9c0c0, #c8c6c8);
+  --chrome-tabs-bg: #c8c6c8;
 }
 
 .deactivated .chrome-tabs {
   background: linear-gradient(#f5f5f5, #ececec);
+  --chrome-tabs-bg: #ececec;
 }
 .chrome-tabs * {
   box-sizing: inherit;
@@ -23,7 +25,7 @@
 .chrome-tabs .chrome-navigate-bar {
   position: absolute;
   bottom: 0;
-  height: 0.45em;
+  height: 3.45em;
   left: 0;
   width: 100%;
   box-shadow: 0 -0.05em rgba(0,0,0,0.27);

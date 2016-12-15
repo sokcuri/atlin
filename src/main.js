@@ -1,6 +1,7 @@
 const {app, BrowserWindow} = require('electron');
 const jsonfile = require('jsonfile');
 const path = require('path');
+const request = require('request');
 let win;
 let lastWindowBounds;
 
@@ -54,6 +55,12 @@ app.on('ready', () => {
     
     
     win = new BrowserWindow(options);
+    win.on('maximize', (e) => {
+        win.webContents.executeJavaScript(`document.body.classList.add('maximized');`);
+    });
+    win.on('unmaximize', (e) => {
+        win.webContents.executeJavaScript(`document.body.classList.remove('maximized');`);
+    });
     win.on('close', (e) => {
         let bounds;
         if (e.sender.isMaximized())
@@ -69,6 +76,10 @@ app.on('ready', () => {
     });
     win.on('closed', (e) => {
         win = null;
+    });
+
+    win.webContents.on('dom-ready', (e) => {
+        //console.info('dom-ready');
     });
 
     win.loadURL(`file://${__dirname}/index.html`);
