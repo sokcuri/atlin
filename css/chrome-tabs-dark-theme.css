@@ -67,3 +67,13 @@
 .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-back, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-forward, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-stop, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-refresh, .chrome-tabs.chrome-tabs-dark-theme .chrome-navigate-home {
   background: #dcdcdc;
 }
+
+.dark-theme .activated .bottom-menu {
+  background: #373737;
+  color: white;
+}
+
+.dark-theme .deactivated .bottom-menu {
+  background: #282828;
+  color: white;
+}

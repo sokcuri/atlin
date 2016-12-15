@@ -55,7 +55,7 @@ LICENSE
 version
 !.gitattributes
 !.gitignore
-!index.js
+!main.js
 !package.json
 
 node_modules

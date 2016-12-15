@@ -1,6 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .chrome-tabs {
@@ -225,14 +226,17 @@ body {
 .bottom-menu {
     bottom: 0px;
     position: absolute;
-    background: #137CC8;
-    width: 100%;
-    padding: 5px;
+    width: calc(100% - 10px);
+    padding: 3px 10px 3px 0px;
     overflow: hidden;
+    font-size: 0.75em;
+    text-align: right;
+    pointer-events: none;
+    cursor: default;
 }
 
 #wv-collect > webview {
-    height: calc(100% - 74px - 30px);
+    height: calc(100% - 74px - 22px);
     top: 74px;
     z-index: 0;
     position: absolute;
