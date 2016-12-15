@@ -1,0 +1,312 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/chrome-tabs.css">
+<link rel="stylesheet" href="css/chrome-tabs-dark-theme.css">
+</head>
+<body class="activated">
+<script>
+  document.body.classList.add(`${process.platform}`);
+</script>
+<div class="chrome-tabs">
+      <div class="chrome-tabs-drag-region"></div>
+      <div class="chrome-tabs-content">
+        <!-- chrome-tab here -->
+      </div>
+      <div class="chrome-tabs-right">
+        <div class="chrome-tabs-settings"></div>
+      </div>
+      <div class="chrome-navigate-bar">
+        <div class="chrome-navigate-button-set">
+          <div class="chrome-navigate-button" id="nav_back">
+            <div class="chrome-navigate-back"></div>
+          </div>
+          <div class="chrome-navigate-button" id="nav_forward">
+            <div class="chrome-navigate-forward"></div>
+          </div>
+          <div class="chrome-navigate-button" id="nav_refresh">
+            <div class="chrome-navigate-refresh"></div>
+          </div>
+          <div class="chrome-navigate-button" id="nav_stop">
+            <div class="chrome-navigate-stop"></div>
+          </div>
+          <div class="chrome-navigate-button" id="nav_home">
+            <div class="chrome-navigate-home"></div>
+          </div>
+          <div class="chrome-navigate-address">
+            <input id="address_text" type="text" value=""></input>
+          </div>
+        </div> 
+      </div>
+      <!-- Styles to prevent flash after JS initialization -->
+      <style>
+        .chrome-tabs .chrome-tab {
+          width: 243px
+        }
+
+        .chrome-tabs .chrome-tab:nth-child(1) {
+          transform: translate3d(0px, 0, 0)
+        }
+
+        .chrome-tabs .chrome-tab:nth-child(2) {
+          transform: translate3d(229px, 0, 0)
+        }
+      </style>
+        <div>
+            <div class="wc-box">
+                <div id="minimize_btn"></div>
+                <div id="maximize_btn"></div>
+                <div id="close_btn"></div>
+            </div>
+        </div>
+    </div>
+    <div id="wv-collect">
+      <!--<webview class="wv-jira" partition="persist:atlatool" style="height: calc(100% - 70px)" src="http://rooibos.atlassian.net/"></webview>-->
+    </div>
+
+    <div class="bottom-menu">
+      <!--
+      <button data-theme-toggle>Toggle dark theme</button> &nbsp;
+      <button data-add-tab>Add new tab</button> &nbsp;
+      <button data-remove-tab>Remove current tab</button>-->
+      Atlin v1.0.0
+    </div>
+
+    <script>
+        var win = require('electron').remote.getCurrentWindow();
+        minimize_btn.addEventListener('click', () => {
+            if (win.isMinimized())
+                win.restore();
+            else
+                win.minimize();
+        });
+        maximize_btn.addEventListener('click', () => {
+            if (win.isMaximized())
+                win.unmaximize();
+            else
+                win.maximize();
+        });
+        close_btn.addEventListener('click', () => {
+            if (!win.isDestroyed())
+                win.close();
+        });
+
+        nav_back.addEventListener('click', () => {
+            tabHash.get(document.querySelector('.chrome-tab-current')).goBack();
+        });
+        nav_forward.addEventListener('click', () => {
+            tabHash.get(document.querySelector('.chrome-tab-current')).goForward();
+        });
+        nav_refresh.addEventListener('click', () => {
+            tabHash.get(document.querySelector('.chrome-tab-current')).reload();
+        });
+        nav_stop.addEventListener('click', () => {
+            tabHash.get(document.querySelector('.chrome-tab-current')).stop();
+        });
+        nav_home.addEventListener('click', () => {
+            let wv = tabHash.get(document.querySelector('.chrome-tab-current'));
+            wv.loadURL(wv.dataset.initurl);
+        });
+
+        var focusOnce = false;
+        address_text.addEventListener('focus', (e) => {
+            focusOnce = true;
+        })
+
+        address_text.addEventListener('click', (e) => {
+            if (!document.getSelection().anchorNode.classList.contains('chrome-navigate-address') ||
+                document.getSelection().type != 'Range')
+                if (focusOnce) {
+                  e.target.setSelectionRange(0, e.target.value.length);
+                }    
+            focusOnce = false;
+        })
+    </script>
+    <script>
+        window.$ = window.jQuery = require('jquery');
+        window.Draggabilly = require('./js/deps/draggabilly.js');
+    </script>
+    <script src="js/chrome-tabs.js"></script>
+    <script>
+      var el = document.querySelector('.chrome-tabs')
+      var chromeTabs = new ChromeTabs()
+
+      chromeTabs.init(el, {
+        tabOverlapDistance: 14,
+        minWidth: 45,
+        maxWidth: 243
+      })
+
+      var tabHash = new WeakMap();
+
+      var wvHiddenAll = (p, exceptEl) => {
+        for (let el of document.querySelectorAll('#wv-collect > webview'))
+            if (exceptEl == el) {
+            }
+            else el.classList.add('hidden')
+      };
+
+      var wvUnHidden = (el) => {
+        el.classList.remove('hidden');
+      };
+
+      var wvTabChange = ({ detail }) => {
+        let wv;
+        if (tabHash.get(detail.tabEl) == undefined) {
+          let url = detail.tabEl.querySelector('.chrome-tab-site').textContent;
+          wv = document.createElement('webview');
+          wv.src = url;
+          wv.partition = "persist:atlatool";
+          wv.style = "height: calc(100% - 70px)";
+          wv.dataset.initurl = url;
+          wv.preload = "./wv_preload.js";
+          wv.addEventListener('will-navigate', (e) => {
+            console.info(wv.hidden);
+            console.warn(wv.src);
+            if (wv.hidden == false) {
+              document.getElementById('address_text').value = e.url;
+            }
+          });
+          document.getElementById('wv-collect').appendChild(wv);
+          tabHash.set(detail.tabEl, wv);
+        } else {
+          wv = tabHash.get(detail.tabEl);
+        }
+        
+        document.getElementById('address_text').value = wv.src;
+        wvUnHidden(wv);
+        wv.focus();
+        wv.style = 'width: calc(100% + 1px)';
+        setTimeout(() => {
+          wvHiddenAll(null, wv);
+          wv.style = '';
+          /*require('electron').remote.getCurrentWindow().setSize(require('electron').remote.getCurrentWindow().getBounds().width-1, require('electron').remote.getCurrentWindow().getBounds().height)*/
+          /*require('electron').remote.getCurrentWindow().setSize(require('electron').remote.getCurrentWindow().getBounds().width+1, require('electron').remote.getCurrentWindow().getBounds().height)*/
+        }, 50);
+        console.log('Active tab changed', detail.tabEl)
+      };
+
+      el.addEventListener('activeTabChange', wvTabChange);
+      el.addEventListener('tabAdd', ({ detail }) => console.log('Tab added', detail.tabEl))
+      el.addEventListener('tabRemove', ({ detail }) => {
+        if (tabHash.get(detail.tabEl)) {
+          document.getElementById('wv-collect').removeChild(tabHash.get(detail.tabEl));
+          tabHash.delete(detail.tabEl);
+          console.log('Tab deleted', detail.tabEl)
+        }
+      });
+
+      //wvTabChange({detail: { 'tabEl': document.querySelector('.chrome-tab-current') }});
+/*
+      document.querySelector('button[data-add-tab]').addEventListener('click', function(){
+        chromeTabs.addTab({
+          title: 'New Tab',
+          favicon: 'http://adamschwartz.co/chrome-tabs/demo/images/default-favicon.png',
+          site: 'http://www.google.com',
+          id: null
+        })
+      });
+
+      document.querySelector('button[data-remove-tab]').addEventListener('click', function(){
+        chromeTabs.removeTab(el.querySelector('.chrome-tab-current'))
+      });
+*/
+      var toggleTheme = () => {
+        if (el.classList.contains('chrome-tabs-dark-theme')) {
+          document.documentElement.classList.remove('dark-theme')
+          el.classList.remove('chrome-tabs-dark-theme')
+          let config = loadConfig();
+          config.theme = '';
+          saveConfig(config);
+        } else {
+          document.documentElement.classList.add('dark-theme')
+          el.classList.add('chrome-tabs-dark-theme')
+          let config = loadConfig();
+          config.theme = 'chrome-tabs-dark-theme';
+          saveConfig(config);
+        }
+      }
+/*
+      document.querySelector('button[data-theme-toggle]').addEventListener('click', function(){
+        
+      })*/
+    </script>
+    <script>
+    const jsonfile = require('jsonfile');
+    const path = require('path');
+    const {app} = require('electron').remote;
+    var saveConfig = (data) => {
+        if (data !== null && typeof data === 'object') { // only object not null or und
+            let file = path.join(app.getPath('userData'), 'config.json');
+            try {
+                jsonfile.writeFileSync(file, data);
+            } catch (e) {
+                console.error('json writeFileSync Error.');
+                console.dir(e);    
+            }
+        }
+    };
+
+    var loadConfig = () => {
+        let file = path.join(app.getPath('userData'), 'config.json');
+        try {
+            let data = jsonfile.readFileSync(file);
+            return data;
+        } catch (e) {
+            console.error('jsonfile readFileSync Error.');
+            console.dir(e);
+            return {};
+        }
+    };
+
+    let config = loadConfig();
+    if (config.theme == 'chrome-tabs-dark-theme') {
+        document.documentElement.classList.add('dark-theme')
+        el.classList.add('chrome-tabs-dark-theme')
+    }
+    </script>
+    <script>
+    
+      // initialize
+      setTimeout(() => {
+        
+        chromeTabs.addTab({
+            title: 'Jira',
+            favicon: 'https://rooibos.atlassian.net/assets/images/icons/favicon.png',
+            site: 'https://rooibos.atlassian.net/secure/Dashboard.jspa',
+            id: null
+          }, true)
+          chromeTabs.addTab({
+            title: 'Confluence',
+            favicon: 'https://rooibos.atlassian.net/wiki/s/1980627581/6452/cafb8c91042efa65f743677a6ba088debbf1b9ae/1/_/favicon.ico',
+            site: 'https://rooibos.atlassian.net/wiki/',
+            id: null
+          })
+          chromeTabs.addTab({
+            title: 'BitBucket',
+            favicon: 'https://bitbucket.org/favicon.ico',
+            site: 'https://bitbucket.org/rooibos/',
+            id: null
+          })
+      }, 50);
+
+      // menu
+      const {remote} = require('electron');
+      const {Menu, MenuItem} = remote;
+
+      const menu = new Menu();
+      menu.append(new MenuItem({label: 'Dark Mode', type: 'checkbox', checked: document.documentElement.classList.contains('dark-theme'), click() { toggleTheme(); }}));
+      menu.append(new MenuItem({type: 'separator'}));
+      menu.append(new MenuItem({label: 'MenuItem2', type: 'checkbox', checked: true}));
+
+      window.addEventListener('contextmenu', (e) => {
+        if (e.srcElement.className == 'chrome-tabs-content') {
+          console.log(e);
+          e.preventDefault();
+          console.info(menu);
+          menu.popup(remote.getCurrentWindow());
+        }
+      }, false)
+    </script>
+  </body>
+</html>
