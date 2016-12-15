@@ -180,7 +180,12 @@
           wv.style = "height: calc(100% - 70px)";
           wv.dataset.initurl = url;
           wv.preload = "./wv_preload.js";
+          wv.allowpopups = true;
 
+          wv.addEventListener('new-window', (e, url) => {
+              e.preventDefault();
+              require('electron').shell.openExternal(url);
+          });
           
           wv.addEventListener('did-start-loading', () => {
               if (wv.hidden == false) {

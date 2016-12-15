@@ -38,7 +38,6 @@ body {
     margin-top: 10px !important;
     -webkit-user-select: none; 
 }
-
 .darwin .chrome-tabs-content {
     left: 0px;
     margin-top: 0px !important;
@@ -51,6 +50,11 @@ body {
 
 .darwin .chrome-tabs .chrome-tabs-content {
     width: calc(100% - 80px) !important;
+}
+
+.fullscreen.darwin .chrome-tabs .chrome-tabs-content {
+    width: calc(100% - 16px) !important;
+    margin-left: 10px !important;
 }
 .chrome-tabs-content, .chrome-navigate-bar {
     /*-webkit-app-region: no-drag;*/
@@ -115,6 +119,7 @@ body {
 .darwin .chrome-tabs-settings-box {
     right: 8px;
     top: 8px;
+    left: initial;
 }
 
 .chrome-tabs-settings {
