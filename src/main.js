@@ -223,7 +223,7 @@ var loadConfig = () => {
 app.on('ready', () => {
     let config = loadConfig();
     let options = {
-        width: 500,
+        width: 800,
         height: 600,
         webPreferences: {
             nodeIntegration: true,
