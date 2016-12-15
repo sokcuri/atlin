@@ -124,7 +124,11 @@
         var webViewHome = () => {
           if (tabHash.get(document.querySelector('.chrome-tab-current'))) {
             let wv = tabHash.get(document.querySelector('.chrome-tab-current'));
-            wv.loadURL(wv.dataset.initurl);
+            try {
+              wv.loadURL(wv.dataset.initurl);
+            } catch(e) {
+              
+            }
           }
         }
 
