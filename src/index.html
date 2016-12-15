@@ -182,9 +182,9 @@
           wv.preload = "./wv_preload.js";
           wv.allowpopups = true;
 
-          wv.addEventListener('new-window', (e, url) => {
+          wv.addEventListener('new-window', (e) => {
               e.preventDefault();
-              require('electron').shell.openExternal(url);
+              require('electron').shell.openExternal(e.url);
           });
           
           wv.addEventListener('did-start-loading', () => {
