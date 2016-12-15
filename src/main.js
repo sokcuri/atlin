@@ -283,3 +283,7 @@ app.on('browser-window-focus', function (e, win) {
 app.on('browser-window-blur', function (e, win) {
   win.webContents.executeJavaScript(`document.body.classList.remove('activated');document.body.classList.add('deactivated');`);
 });
+
+app.on('window-all-closed', () => {
+  app.quit();
+});
