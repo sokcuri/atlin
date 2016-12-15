@@ -1,6 +1,7 @@
 {
   "name": "atlin",
   "version": "1.0.0",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron ./src/main.js",
     "build": "node tools/build.js",
