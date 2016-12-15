@@ -34,7 +34,7 @@
             <div class="chrome-navigate-home"></div>
           </div>
           <div class="chrome-navigate-address">
-            <input id="address_text" type="text" value=""></input>
+            <input id="address_text" type="text" value="" readonly></input>
           </div>
         </div> 
       </div>
@@ -69,7 +69,7 @@
       <button data-theme-toggle>Toggle dark theme</button> &nbsp;
       <button data-add-tab>Add new tab</button> &nbsp;
       <button data-remove-tab>Remove current tab</button>-->
-      Atlin v1.0.1 (161215)
+      Atlin v1.0.2 (161215)
     </div>
 
     <script>
@@ -180,36 +180,18 @@
           wv.style = "height: calc(100% - 70px)";
           wv.dataset.initurl = url;
           wv.preload = "./wv_preload.js";
-          wv.allowpopups = true;
+          //wv.allowpopups = true;
 
           wv.addEventListener('new-window', (e) => {
-              e.preventDefault();
               require('electron').shell.openExternal(e.url);
           });
-          
-          wv.addEventListener('did-start-loading', () => {
-              if (wv.hidden == false) {
-                document.body.classList.add('loading');
-              }
-          });
-          wv.addEventListener('did-stop-loading', () => {
-              if (wv.hidden == false) {
-                document.body.classList.remove('loading');
-              }
-          });
-          wv.addEventListener('did-frame-finish-load', () => {
-              if (wv.hidden == false) {
-                document.body.classList.remove('loading');
-              }
-              return true;
-          });
           wv.addEventListener('will-navigate', (e) => {
-            if (wv.hidden == false) {
+            if (tabHash.get(document.querySelector('.chrome-tab-current')) == wv) {
               document.getElementById('address_text').value = e.url;
             }
           });
           wv.addEventListener('did-navigate', (e) => {
-            if (wv.hidden == false) {
+            if (tabHash.get(document.querySelector('.chrome-tab-current')) == wv) {
               document.getElementById('address_text').value = e.url;
             }
           });

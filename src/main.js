@@ -248,7 +248,10 @@ app.on('ready', () => {
     
     
     win = new BrowserWindow(options);
-    if (config.isMaximized) win.maximize();
+    if (config.isMaximized) {
+      win.maximize();
+      win.webContents.executeJavaScript(`document.body.classList.add('maximized');`);
+    }
     win.on('maximize', (e) => {
         win.webContents.executeJavaScript(`document.body.classList.add('maximized');`);
     });
